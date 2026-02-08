@@ -19,25 +19,28 @@ envelope.addEventListener("click", () => {
         document.querySelector(".letter-window").classList.add("open");
     },50);
 });
-const step = 120; // how far it moves each time
+
+// Make sure the button is positioned once
+noBtn.style.position = "absolute";
 
 noBtn.addEventListener("mouseover", () => {
-    const rect = noBtn.getBoundingClientRect();
+    const padding = 20; // keeps it away from edges
 
-    const maxX = window.innerWidth - rect.width;
-    const maxY = window.innerHeight - rect.height;
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
 
-    let newX = rect.left + (Math.random() * step * 2 - step);
-    let newY = rect.top + (Math.random() * step * 2 - step);
+    const maxX = window.innerWidth - btnWidth - padding;
+    const maxY = window.innerHeight - btnHeight - padding;
 
-    // Keep it inside the screen
-    newX = Math.max(0, Math.min(newX, maxX));
-    newY = Math.max(0, Math.min(newY, maxY));
+    const minX = padding;
+    const minY = padding;
 
-    noBtn.style.position = "absolute";
-    noBtn.style.left = `${newX}px`;
-    noBtn.style.top = `${newY}px`;
-    noBtn.style.transition = "all 0.3s ease";
+    const x = Math.random() * (maxX - minX) + minX;
+    const y = Math.random() * (maxY - minY) + minY;
+
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+    noBtn.style.transition = "left 0.3s ease, top 0.3s ease";
 });
 
 
