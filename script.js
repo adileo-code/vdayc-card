@@ -19,22 +19,27 @@ envelope.addEventListener("click", () => {
         document.querySelector(".letter-window").classList.add("open");
     },50);
 });
-
-// Logic to move the NO btn
+const step = 120; // how far it moves each time
 
 noBtn.addEventListener("mouseover", () => {
-    const min = 200;
-    const max = 250;
+    const rect = noBtn.getBoundingClientRect();
 
-    const distance = Math.random() * (max - min) + min;
-    const angle = Math.random() * Math.PI * 2;
+    const maxX = window.innerWidth - rect.width;
+    const maxY = window.innerHeight - rect.height;
 
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
+    let newX = rect.left + (Math.random() * step * 2 - step);
+    let newY = rect.top + (Math.random() * step * 2 - step);
 
-    noBtn.style.transition = "transform 0.3s ease";
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    // Keep it inside the screen
+    newX = Math.max(0, Math.min(newX, maxX));
+    newY = Math.max(0, Math.min(newY, maxY));
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = `${newX}px`;
+    noBtn.style.top = `${newY}px`;
+    noBtn.style.transition = "all 0.3s ease";
 });
+
 
 // Logic to make YES btn to grow
 
