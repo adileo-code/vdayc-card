@@ -20,27 +20,19 @@ envelope.addEventListener("click", () => {
     },50);
 });
 
-// Make sure the button is positioned once
-noBtn.style.position = "absolute";
-
+// Logic to move the NO btn
 noBtn.addEventListener("mouseover", () => {
-    const padding = 20; // keeps it away from edges
+    const min = 200;
+    const max = 200;
 
-    const btnWidth = noBtn.offsetWidth;
-    const btnHeight = noBtn.offsetHeight;
+    const distance = Math.random() * (max - min) + min;
+    const angle = Math.random() * Math.PI * 2;
 
-    const maxX = window.innerWidth - btnWidth - padding;
-    const maxY = window.innerHeight - btnHeight - padding;
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance;
 
-    const minX = padding;
-    const minY = padding;
-
-    const x = Math.random() * (maxX - minX) + minX;
-    const y = Math.random() * (maxY - minY) + minY;
-
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
-    noBtn.style.transition = "left 0.3s ease, top 0.3s ease";
+    noBtn.style.transition = "transform 0.3s ease";
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
 });
 
 
